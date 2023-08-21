@@ -46,18 +46,18 @@ export enum Instructions {
   INV = 0b00000,
   ADD = 0b00001,
   SUB = 0b00010,
-  OR  = 0b00011,
+  OR = 0b00011,
   AND = 0b00100,
   XOR = 0b00101,
   GET = 0b00110,
   SET = 0b00111,
-  LD  = 0b01000,
+  LD = 0b01000,
   SWP = 0b01001,
   // ...
-  JZ  = 0b11100,
+  JZ = 0b11100,
   JNZ = 0b11101,
-  JG  = 0b11110,
-  JL  = 0b11111,
+  JG = 0b11110,
+  JL = 0b11111,
 }
 
 export class CPU {
@@ -174,9 +174,9 @@ export const assemble = (code: string): AssembleResult => {
   }
 
   lines.forEach((line: string) => {
-    const tokens = line.split(';')[0].split(/[ ,]+/);
+    const tokens = line.split(';')[0].split(' ');
     const opcode = tokens.shift().toUpperCase();
-    const operants = tokens.join('').toUpperCase().split(',').filter(x => x.trim().length > 0);
+    const operants = tokens.join('').toUpperCase().split(',').filter(x => x.trim().length > 0).map(x => x.trim());
 
     if (opcode.endsWith(':')) {
       labels[opcode.substring(0, opcode.length-1)] = bytes.length;
