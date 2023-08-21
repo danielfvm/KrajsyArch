@@ -11,7 +11,7 @@
 		<script src="./dist/app-bundle.js"></script>
 	</head>
 	<body>
-		<a href="https://github.com/danielfvm/" class="github">
+		<a href="https://github.com/danielfvm/KrajsyArch" class="github">
 			<img src="https://files.catbox.moe/gd0hu5.png"></img>
 		</a>
 
@@ -38,7 +38,7 @@
 						<p>JL X, Y</p>
 						<br>
 						<p><b>constant:</b> #FF</p>
-						<p><b>address:</b> *FF</p>
+						<p><b>read RAM:</b> *FF</p>
 						<p><b>registers:</b> A/B</p>
 					</td>
 					<td>
@@ -70,8 +70,11 @@
 			<button id="compile" title="Compile the program code">Compile</button>
 			<button id="reset" title="Reset registers and RAM">Reset</button>
 			<button id="step" title="Single step the simulation">Step</button>
-			<button id="run" title="Start and stop simulation (speed 100ms)">Run</button>
 			<button id="share" title="Share your code">Share</button>
+
+			<button id="run" title="Start and stop simulation (speed 100ms)">Run</button>
+			<input type="range" id="speed" name="Simulation speed" min="0" value="10" max="50" />
+			<label for="speed" id="speedlabel"></label>
 		</center>
 	</body>
 </html>

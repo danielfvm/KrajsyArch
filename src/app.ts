@@ -14,6 +14,8 @@ window.onload = () => {
   const compile = document.getElementById("compile");
   const run = document.getElementById("run");
   const share = document.getElementById("share");
+  const speedlabel = document.getElementById("speedlabel");
+  const speed = document.getElementById("speed") as HTMLInputElement;
 
   let result: AssembleResult = null;
   let cpu: CPU = null;
@@ -24,6 +26,18 @@ window.onload = () => {
       input.value = atob(window.location.search.replace("?share=", ""));
     } catch(e) {}
   }
+
+  const setTickUpdater = (value) => {
+    if (value == null) {
+      inv = setInterval(() => {
+        step.onclick(null);
+      }, parseInt(speed.value) * 10);
+    } else {
+      clearInterval(value);
+      inv = null;
+    }
+  }
+
 
   reset.onclick = () => {
     cpu?.reset();
@@ -54,14 +68,7 @@ window.onload = () => {
 
   run.onclick = () => {
     run.innerText = inv == null ? "Stop" : "Run";
-    if (inv == null) {
-      inv = setInterval(() => {
-        step.onclick(null);
-      }, 100);
-    } else {
-      clearInterval(inv);
-      inv = null;
-    }
+    setTickUpdater(inv);
   }
 
   share.onclick = () => {
@@ -74,6 +81,15 @@ window.onload = () => {
     }, (err) => {
       alert("Error copying link to clipboard: " + err);
     });
+  }
+
+  speed.onmousemove = () => {
+    speedlabel.innerText = speed.value;
+    if (inv != null) {
+      clearInterval(inv);
+      setTickUpdater(inv);
+      setTickUpdater(inv);
+    }
   }
 
   input.addEventListener('keydown', function(e) {
@@ -101,4 +117,5 @@ window.onload = () => {
   }
 
   compile.onclick(null);
+  speed.onmousemove(null);
 }

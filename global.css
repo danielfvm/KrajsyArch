@@ -35,6 +35,10 @@ b {
   color: #707070;
 }
 
+input[type="range"] {
+  height: 12px;
+}
+
 #ram {
   height: 400px !important;
   overflow: hidden;
