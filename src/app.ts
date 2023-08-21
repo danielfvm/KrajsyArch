@@ -45,7 +45,14 @@ window.onload = () => {
   }
 
   step.onclick = () => {
-    if (result.layout.split('\n').filter((x) => parseInt(x) == cpu.PC).length == 0) {
+    let lastIns = result.layout.split('\n').filter(x => x.trim().length > 0).pop();
+    if (lastIns == undefined) {
+      if (inv != null)
+        run.onclick(null);
+      alert("Nothing to execute, compile first!");
+    }
+
+    if (parseInt(lastIns) < cpu.PC) {
       if (inv != null)
         run.onclick(null);
       alert("PC hit end of ROM");
