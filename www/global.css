@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Dangrek&display=swap');
+
+body {
+  background: #f0f0f0;
+  color: #b0b0b0;
+  font-family: 'Dangrek', cursive;
+}
+
+h1 {
+  text-align: center;
+  margin: 0px;
+  font-size: 50px;
+}
+
+h2 {
+  text-align: center;
+  margin: 0px;
+}
+
+textarea {
+  width: 400px;
+  height: 700px;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  resize: none;
+}
+
+p {
+  margin: 0px;
+}
+
+b {
+  color: #707070;
+}
+
+#ram {
+  height: 400px !important;
+  overflow: hidden;
+  line-height: 25px;
+}
+
+.register {
+  height: 21px !important;
+  font-size: 16px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.github {
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  left: 10px;
+  width: 50px;
+  height: auto;	
+  background: black;
+  border-radius: 0 0 5px 5px;
+  transition: top 0.1s;
+}
+
+.github:hover {
+  top: 0px;
+  transition: top 0.1s;
+}
+
+.github > * {
+  margin-top: 20px;
+  width: 50px;
+  height: auto;	
+}

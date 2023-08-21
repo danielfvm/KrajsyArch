@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="author" content="DeanCode" />
+		<meta name="description" content="An assembler and simulator for krajsyboys' custom cpu architecture." />
+
+		<title>KrajsyArch</title>
+
+        <link rel="stylesheet" type="text/css" href="global.css">
+		<script src="../dist/app-bundle.js"></script>
+	</head>
+	<body>
+		<a href="https://github.com/danielfvm/" class="github">
+			<img src="https://files.catbox.moe/gd0hu5.png"></img>
+		</a>
+
+		<center>
+			<h1>KrajsyArch Assembler</h1>
+
+			<table>
+				<tr>
+					<td width="130px">
+						<p><b>instructions:</b></p>
+						<p>INV X</p>
+						<p>ADD X, Y</p>
+						<p>SUB X, Y</p>
+						<p>OR X, Y</p>
+						<p>AND X, Y</p>
+						<p>XOR X, Y</p>
+						<p>GET X, Y</p>
+						<p>SET X, Y</p>
+						<p>LD X, Y</p>
+						<p>SWP</p>
+						<p>JZ X, Y</p>
+						<p>JNZ X, Y</p>
+						<p>JG X, Y</p>
+						<p>JL X, Y</p>
+						<br>
+						<p><b>constant:</b> #FF</p>
+						<p><b>address:</b> *FF</p>
+						<p><b>registers:</b> A/B</p>
+					</td>
+					<td>
+						<h2>Input</h2>
+						<textarea spellcheck="false" id="input" placeholder="Your asm code here" wrap="off"></textarea>
+					</td>
+					<td>
+						<h2>Output</h2>
+						<textarea spellcheck="false" id="output" placeholder="Assembler output here" wrap="off" readonly></textarea>
+					</td>
+					<td>
+						<h2>RAM</h2>
+						<textarea spellcheck="false" id="ram" wrap="off" readonly></textarea>
+
+						<h2>Register A</h2>
+						<textarea spellcheck="false" id="regA" class="register" wrap="off" readonly></textarea>
+
+						<h2>Register B</h2>
+						<textarea spellcheck="false" id="regB" class="register" wrap="off" readonly></textarea>
+
+						<h2>Register PC</h2>
+						<textarea spellcheck="false" id="regPC" class="register" wrap="off" readonly></textarea>
+					</td>
+				</tr>
+			</table>
+
+			<br>
+
+			<button id="compile" title="Compile the program code">Compile</button>
+			<button id="reset" title="Reset registers and RAM">Reset</button>
+			<button id="step" title="Single step the simulation">Step</button>
+			<button id="run" title="Start and stop simulation (speed 100ms)">Run</button>
+			<button id="share" title="Share your code">Share</button>
+		</center>
+	</body>
+</html>
