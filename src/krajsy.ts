@@ -147,14 +147,16 @@ export class CPU {
   }
 }
 
+type LabelMap = {[id: string]: number;};
+
 export interface AssembleResult {
   bytes: number[],
-  layout: string
+  layout: string,
+  labels: LabelMap,
 }
 
-export const assemble = (code: string): AssembleResult => {
+const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): AssembleResult => {
   const lines: string[] = code.split('\n').filter((x) => x.trim().length != 0 && !x.startsWith(';'));
-  const labels: {[id: string]: number;} = {};
 
   const bytes: number[] = [];
   let layout = "";
@@ -174,6 +176,11 @@ export const assemble = (code: string): AssembleResult => {
       case '#':
         return [ 0b11, parseInt(token.substring(1), 16) ]
       default:
+        // in this stage we will ignore potential errors and will assume it must be a label
+        if (preCompile) {
+          return [ 0b11, 0 ];
+        }
+
         if (labels[token] != undefined) {
           return [ 0b11, labels[token] ];
         }
@@ -218,5 +225,11 @@ export const assemble = (code: string): AssembleResult => {
   return {
     bytes: bytes,
     layout: layout,
+    labels: labels,
   };
+}
+
+export const assemble = (code: string): AssembleResult => {
+  const { labels } = _assemble(code); // pre compile to get all labels
+  return _assemble(code, labels, false);
 }
