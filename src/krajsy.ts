@@ -53,6 +53,10 @@ export enum Instructions {
   SET = 0b00111,
   LD = 0b01000,
   SWP = 0b01001,
+  INC = 0b01010,
+  DEC = 0b01011,
+  SL = 0b01100,
+  SR = 0b01101,
   // ...
   JZ = 0b11100,
   JNZ = 0b11101,
@@ -102,6 +106,10 @@ export class CPU {
       case Instructions.GET: X0 = this.ram.get(Y); break;
       case Instructions.SET: this.ram.set(Y, X); break;
       case Instructions.LD:  X0 = Y; break;
+      case Instructions.INC: X0 = X+1; break;
+      case Instructions.DEC: X0 = X-1; break;
+      case Instructions.SL:  X0 = X << 1; break;
+      case Instructions.SR:  X0 = X >> 1; break;
       case Instructions.SWP: {
         [this.A, this.B] = [this.B, this.A];
       } break;
