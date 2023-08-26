@@ -39,6 +39,11 @@ input[type="range"] {
   height: 12px;
 }
 
+#speedlabel {
+  width: 30px;
+  display: inline-block;
+}
+
 #ram {
   height: 400px !important;
   overflow: hidden;
