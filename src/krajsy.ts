@@ -120,10 +120,10 @@ export class CPU {
         if (X != 0) this.PC = Y - 1;
       } break;
       case Instructions.JG: {
-        if (X > 0) this.PC = Y - 1;
+        if (!(X & 0x80)) this.PC = Y - 1;
       } break;
       case Instructions.JL: {
-        if (X < 0) this.PC = Y - 1;
+        if (X & 0x80) this.PC = Y - 1;
       } break;
     }
 
