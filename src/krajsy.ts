@@ -166,9 +166,12 @@ const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): Asse
     if (token == undefined) 
       return [ 0, -1 ];
 
-    for (const [key, value] of Object.entries(labels).reverse())
-      if (typeof(value) === "string")
-        token = token.replace(key, value);
+    for (const [key, value] of Object.entries(labels).sort().reverse())
+      if (typeof(value) === "string" && token.includes(key))
+        return fetchOperant(token.replace(key, value));
+
+    if (token.includes('#') && token.includes('*'))
+      throw "Instruction cannot have both # and *"
 
     switch(token[0]) {
       case 'A':
@@ -181,13 +184,14 @@ const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): Asse
         return [ 0b11, parseInt(token.substring(1), 16) ]
       default:
         // in this stage we will ignore potential errors and will assume it must be a label
-        if (preCompile) {
+        if (preCompile)
           return [ 0b11, 0 ];
-        }
 
-        if (typeof(labels[token]) === "number") {
+        if (typeof(labels[token]) === "number")
           return [ 0b11, labels[token] as number ];
-        }
+
+        if (!isNaN(token as any)) 
+          throw "Invalid operant value! Are you missing # or * ?"
 
         throw "Invalid operant value!";
     }
