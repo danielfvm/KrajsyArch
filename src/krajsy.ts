@@ -61,7 +61,7 @@ export enum Instructions {
   JZ = 0b11100,
   JNZ = 0b11101,
   JG = 0b11110,
-  JL = 0b11111,
+  JMP = 0b11111,
 }
 
 export class CPU {
@@ -110,6 +110,7 @@ export class CPU {
       case Instructions.DEC: X0 = X-1; break;
       case Instructions.SL:  X0 = X << 1; break;
       case Instructions.SR:  X0 = X >> 1; break;
+      case Instructions.JMP:  this.PC = Y - 1; break;
       case Instructions.SWP: {
         [this.A, this.B] = [this.B, this.A];
       } break;
@@ -120,9 +121,6 @@ export class CPU {
         if (X != 0) this.PC = Y - 1;
       } break;
       case Instructions.JG: {
-        if (!(X & 0x80)) this.PC = Y - 1;
-      } break;
-      case Instructions.JL: {
         if (X & 0x80) this.PC = Y - 1;
       } break;
     }
@@ -216,8 +214,13 @@ const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): Asse
     if (ins == undefined)
       throw "Opcode does not exist!";
 
-    const x = operants.length > 0 && fetchOperant(operants[0]);
-    const y = operants.length > 1 && fetchOperant(operants[1]);
+    let x = operants.length > 0 && fetchOperant(operants[0]);
+    let y = operants.length > 1 && fetchOperant(operants[1]);
+
+    if (opcode == Instructions[Instructions.JMP]) {
+      y = x;
+      x = [ 0b00, -1 ];
+    }
 
     if (x[0] > 0b01)
       throw "First operant can only be A or B!";
