@@ -147,7 +147,7 @@ export class CPU {
   }
 }
 
-type LabelMap = {[id: string]: number;};
+type LabelMap = {[id: string]: number|string;};
 
 export interface AssembleResult {
   bytes: number[],
@@ -181,9 +181,12 @@ const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): Asse
           return [ 0b11, 0 ];
         }
 
-        if (labels[token] != undefined) {
-          return [ 0b11, labels[token] ];
+        if (typeof(labels[token]) === "number") {
+          return [ 0b11, labels[token] as number ];
+        } else if (typeof(labels[token]) === "string") {
+          return fetchOperant(labels[token] as string);
         }
+
         throw "Invalid operant value!";
     }
   }
@@ -195,6 +198,11 @@ const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): Asse
 
     if (opcode.endsWith(':')) {
       labels[opcode.substring(0, opcode.length-1)] = bytes.length;
+      return;
+    }
+
+    if (operants.length >= 1 && operants[0].startsWith('=')) {
+      labels[opcode] = operants.join('').substring(1);
       return;
     }
 
