@@ -166,6 +166,10 @@ const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): Asse
     if (token == undefined) 
       return [ 0, -1 ];
 
+    for (const [key, value] of Object.entries(labels).reverse())
+      if (typeof(value) === "string")
+        token = token.replace(key, value);
+
     switch(token[0]) {
       case 'A':
         return [ 0b00, -1 ]
@@ -183,8 +187,6 @@ const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): Asse
 
         if (typeof(labels[token]) === "number") {
           return [ 0b11, labels[token] as number ];
-        } else if (typeof(labels[token]) === "string") {
-          return fetchOperant(labels[token] as string);
         }
 
         throw "Invalid operant value!";
@@ -192,7 +194,7 @@ const _assemble = (code: string, labels: LabelMap = {}, preCompile = true): Asse
   }
 
   lines.forEach((line: string) => {
-    const tokens = line.split(';')[0].split(' ');
+    const tokens = line.split(';')[0].trim().split(' ');
     const opcode = tokens.shift().toUpperCase();
     const operants = tokens.join('').toUpperCase().split(',').filter(x => x.trim().length > 0).map(x => x.trim());
 
