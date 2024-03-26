@@ -1,7 +1,7 @@
 # KrajsyArch
 ![Repository size](https://img.shields.io/github/repo-size/danielfvm/KrajsyArch?color=39d45f) 
 [![GitHub last commit](https://img.shields.io/github/last-commit/danielfvm/KrajsyArch?color=39d45f)](https://github.com/danielfvm/KrajsyArch/commits/master) 
-![License](https://img.shields.io/badge/license-MIT-39d45f) 
+![License](https://img.shields.io/badge/license-GPL-39d45f) 
 [![Stargazers](https://img.shields.io/github/stars/danielfvm/KrajsyArch?color=39d45f&logo=github)](https://github.com/danielfvm/KrajsyArch/stargazers)
 
 ![image](https://github.com/danielfvm/KrajsyArch/assets/23420640/92a326a6-221f-423d-947c-7b52d44e5b9e)
