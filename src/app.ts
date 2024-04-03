@@ -8,6 +8,8 @@ window.onload = () => {
   const regA = document.getElementById("regA") as HTMLTextAreaElement;
   const regB = document.getElementById("regB") as HTMLTextAreaElement;
   const regPC = document.getElementById("regPC") as HTMLTextAreaElement;
+  const regIO = document.getElementById("regIO") as HTMLTextAreaElement;
+  const regSLP = document.getElementById("regSLP") as HTMLTextAreaElement;
 
   const reset = document.getElementById("reset");
   const step = document.getElementById("step");
@@ -119,6 +121,8 @@ window.onload = () => {
     regA.value = `0x${cpu?.A.toString(16).padStart(2, '0')}\t0b${cpu?.A.toString(2).padStart(8, '0')}\t${cpu?.A}`;
     regB.value = `0x${cpu?.B.toString(16).padStart(2, '0')}\t0b${cpu?.B.toString(2).padStart(8, '0')}\t${cpu?.B}`;
     regPC.value = `0x${cpu?.PC.toString(16).padStart(2, '0')}\t0b${cpu?.PC.toString(2).padStart(8, '0')}\t${cpu?.PC}`;
+    regIO.value = `0x${cpu?.IO.toString(16).padStart(2, '0')}\t0b${cpu?.IO.toString(2).padStart(8, '0')}\t${cpu?.IO}`;
+    regSLP.value = `0x${cpu?.SLP.toString(16).padStart(2, '0')}\t0b${cpu?.SLP.toString(2).padStart(8, '0')}\t${cpu?.SLP}`;
 
     output.value = result.layout.split('\n').map((x) => parseInt(x) == cpu.PC ? `>${x}` : ' ' + x).join('\n').replace(/\n$/g, '\n\n');
   }
