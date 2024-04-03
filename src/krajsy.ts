@@ -22,6 +22,11 @@ export class ROM {
   dump(): string {
     return this.data.map((x, i) => x.toString(16).padStart(2, '0') + (((i + 1) % 16) ? ' ' : '\n')).join('')
   }
+
+  vhdl(): string {
+    const data = this.data.map((x, i) => 'x"' + x.toString(16).padStart(2, '0') + '"' + (((i + 1) % 16) ? ',' : ',\n')).join('')
+    return data.substring(0, data.length - 2); // remove last comma
+  }
 }
 
 export class RAM extends ROM {

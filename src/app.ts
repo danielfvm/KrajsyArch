@@ -10,6 +10,7 @@ window.onload = () => {
   const regPC = document.getElementById("regPC") as HTMLTextAreaElement;
   const regIO = document.getElementById("regIO") as HTMLTextAreaElement;
   const regSLP = document.getElementById("regSLP") as HTMLTextAreaElement;
+  const rom = document.getElementById("rom") as HTMLTextAreaElement;
 
   const reset = document.getElementById("reset");
   const step = document.getElementById("step");
@@ -79,6 +80,14 @@ window.onload = () => {
     run.innerText = inv == null ? "Stop" : "Run";
     setTickUpdater(inv);
   }
+
+  rom.onclick = () => {
+    navigator.clipboard.writeText(cpu?.rom?.vhdl()).then(() => {
+      alert("Copied VHDL ROM to clipboard!");
+    }, (err) => {
+      alert("Error copying ROM to clipboard: " + err);
+    });
+  };
 
   share.onclick = () => {
     const url = window.location;
